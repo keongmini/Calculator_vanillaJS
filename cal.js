@@ -11,8 +11,6 @@ function checkOperation() {
     result_num /= now_num;
   } else if (operation === "sym_*") {
     result_num *= now_num;
-  } else {
-    result_num = now_num;
   }
 }
 
@@ -42,8 +40,9 @@ function calClick(event) {
     now_num = 0;
     operation = event;
   } else {
-    checkOperation();
     operation = event;
+    checkOperation();
+    now_num = 0;
     document.getElementById("answer").innerHTML = result_num;
   }
 }
