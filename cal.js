@@ -1,6 +1,7 @@
 let resultNumber;
 let nowNumber;
 let operation;
+let isNegative = false;
 
 function numberClick(event) {
   if (!operation && resultNumber) {
@@ -10,7 +11,9 @@ function numberClick(event) {
   const newNumber = Number(document.getElementById(event).innerText);
 
   !nowNumber
-    ? (nowNumber = newNumber)
+    ? isNegative
+      ? ((nowNumber = -1 * newNumber), (isNegative = false))
+      : (nowNumber = newNumber)
     : (nowNumber = nowNumber * 10 + newNumber);
 
   document.getElementById("answer").innerHTML = nowNumber;
@@ -29,7 +32,12 @@ function makeNumber() {
 }
 
 function operationClick(event) {
-  if (!resultNumber) {
+  isIgnored = false;
+
+  if (!resultNumber && !nowNumber) {
+    isIgnored = true;
+    isNegative = event === "sym_-" ? true : false;
+  } else if (!resultNumber) {
     operation = event;
     resultNumber = nowNumber;
   } else {
@@ -37,7 +45,7 @@ function operationClick(event) {
     operation = event;
   }
 
-  document.getElementById("answer").innerHTML = resultNumber;
+  document.getElementById("answer").innerHTML = isIgnored ? "" : resultNumber;
   nowNumber = null;
 }
 
