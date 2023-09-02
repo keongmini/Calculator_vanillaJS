@@ -32,7 +32,7 @@ function makeNumber() {
 }
 
 function operationClick(event) {
-  isIgnored = false;
+  let isIgnored = false;
 
   if (!resultNumber && !nowNumber) {
     isIgnored = true;
